@@ -6,29 +6,18 @@ services:
   backend:
     build:
       context: ./barberflow_api
-    # A porta 5000 fica interna, o Coolify vai gerenciar o acesso
-    # expose:
-    #   - "5000"
     environment:
       # As variáveis de ambiente serão injetadas pelo Coolify
       - DATABASE_URL=${DATABASE_URL}
       - SECRET_KEY=${SECRET_KEY}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-    depends_on:
-      - db # Removemos o serviço 'db', mas o backend pode precisar disso para a ordem de inicialização.
-           # Se der erro, podemos remover esta seção 'depends_on' também.
+    # A linha 'depends_on' foi removida daqui
 
   # Serviço do Frontend
   frontend:
     build:
       context: ./barberflow-frontend
-    # A porta 3000 fica interna, o Coolify vai gerenciar o acesso
-    # expose:
-    #  - "3000"
     environment:
       - REACT_APP_API_URL=${REACT_APP_API_URL}
     depends_on:
       - backend
-
-# O serviço 'db' foi removido daqui, pois estamos usando o banco de dados
-# que foi criado separadamente no painel do Coolify.
