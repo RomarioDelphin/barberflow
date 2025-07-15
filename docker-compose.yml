@@ -1,44 +1,34 @@
+# docker-compose.yml
 version: '3.8'
 
 services:
+  # Serviço do Backend (API)
   backend:
     build:
       context: ./barberflow_api
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./barberflow_api/src/database:/app/src/database
+    # A porta 5000 fica interna, o Coolify vai gerenciar o acesso
+    # expose:
+    #   - "5000"
     environment:
+      # As variáveis de ambiente serão injetadas pelo Coolify
+      - DATABASE_URL=${DATABASE_URL}
       - SECRET_KEY=${SECRET_KEY}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - DATABASE_URL=${DATABASE_URL}
     depends_on:
-      - db
+      - db # Removemos o serviço 'db', mas o backend pode precisar disso para a ordem de inicialização.
+           # Se der erro, podemos remover esta seção 'depends_on' também.
 
+  # Serviço do Frontend
   frontend:
     build:
       context: ./barberflow-frontend
-      dockerfile: Dockerfile
-    ports:
-      - "5173:5173"
+    # A porta 3000 fica interna, o Coolify vai gerenciar o acesso
+    # expose:
+    #  - "3000"
     environment:
-      - VITE_API_URL=${REACT_APP_API_URL}
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
     depends_on:
       - backend
 
-  db:
-    image: postgres:13-alpine
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    ports:
-      - "5432:5432"
-
-volumes:
-  db_data:
-
-
+# O serviço 'db' foi removido daqui, pois estamos usando o banco de dados
+# que foi criado separadamente no painel do Coolify.
