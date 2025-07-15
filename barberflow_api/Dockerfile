@@ -15,8 +15,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia o resto do código da aplicação para o diretório de trabalho
 COPY . .
 
-# Expõe a porta que a aplicação Flask vai usar
+# Expõe a porta que a aplicação vai usar
 EXPOSE 5000
 
-# Comando para iniciar a aplicação quando o contêiner rodar
-CMD ["python", "src/main.py"]
+# Comando para iniciar a aplicação em MODO DE PRODUÇÃO com Gunicorn
+# Este é o comando corrigido
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.main:app"]
