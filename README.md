@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=BARBERFLOW&fontSize=60&fontAlignY=35&desc=SaaS%20Vertical%20|%20Gestão%20Inteligente%20de%20Fluxo&descAlignY=55&descSize=18&fontColor=ffffff&customColorList=06b6d4,000205&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=BARBERFLOW&fontSize=60&fontAlignY=35&desc=SaaS%20Vertical%20|%20Gest%C3%A3o%20Inteligente%20de%20Fluxo&descAlignY=55&descSize=18&fontColor=ffffff&customColorList=06b6d4,000205&animation=fadeIn" width="100%"/>
 </div>
 
 <div align="center">
@@ -57,3 +57,38 @@ barberflow/
 ├── 📜 barberflow_schema.sql    # Estrutura do Banco de Dados
 ├── 🤖 n8n_integration_guide.md # Documentação de Automação
 └── 📄 analise_requisitos.md    # Engenharia de Software
+
+```
+
+---
+
+## 🚀 Como Rodar (Deploy)
+
+Este projeto foi desenhado para rodar em qualquer ambiente compatível com Docker, garantindo que a infraestrutura seja replicável.
+
+### 1. Clone o Repositório
+
+```bash
+git clone [https://github.com/RomarioDelphin/barberflow.git](https://github.com/RomarioDelphin/barberflow.git)
+
+```
+
+### 2. Execute via Docker
+
+Na raiz do projeto, suba os containers de Aplicação e Banco de Dados:
+
+```bash
+docker-compose up --build
+
+```
+
+### 3. Acesso
+
+* **Frontend:** Acesse `http://localhost:3000`
+* **API Backend:** Acesse `http://localhost:5000`
+
+---
+
+<div align="center">
+<p>Desenvolvido por <strong>Romário Delphin</strong> como parte do portfólio <strong>RAM.IO Holdings</strong>.</p>
+</div>
